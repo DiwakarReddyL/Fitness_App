@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Products Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2874f0;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #2874f0;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1a5acb;
+        }
+        .filter-container, .sort-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+        select {
+            padding: 8px;
+            margin-left: 10px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .product-name {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-price {
+            color: #2874f0;
+            font-weight: bold;
+        }
+        .buy-button {
+            margin-top: 10px;
+            background-color: #2874f0;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background-color: #1a5acb;
+        }
+        .rating {
+            color: #ff9529;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fitness Products Store</h1>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for products...">
+        <button onclick="searchOnFlipkart()">Search</button>
+    </div>
+
+    <div class="filter-container">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter" onchange="filterProducts()">
+            <option value="all">All</option>
+            <option value="equipment">Equipment</option>
+            <option value="nutrition">Nutrition</option>
+            <option value="accessories">Accessories</option>
+        </select>
+    </div>
+
+    <div class="sort-container">
+        <label for="sortPrice">Sort by Price:</label>
+        <select id="sortPrice" onchange="sortProducts()">
+            <option value="none">Select</option>
+            <option value="low-high">Low to High</option>
+            <option value="high-low">High to Low</option>
+        </select>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+
+    <script>
+        const products = [
+            { name: "Pair of Dumbbells - 5kg", price: "1,049 - ₹2,300", category: "equipment", image: "https://th.bing.com/th/id/OIP.AvB5RPXgY_338c7qFVGAXAHaEK?w=294&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7", rating: 4.5 },
+            { name: "Premium Yoga Mat", price: "399 - ₹1,999", category: "equipment", image: "https://th.bing.com/th/id/OIP._9mA7Xn-2ghY1gNi5H-oEwHaE8?w=294&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7", rating: 4.8 },
+            { name: "Resistance Bands - Set of 5", price: "499 - ₹1,299", category: "equipment", image: "https://th.bing.com/th/id/OIP.EOPo3zeewMUi0lwvV4cEdQAAAA?rs=1&pid=ImgDetMain", rating: 4.3 },
+            { name: "Whey Protein Powder - 1kg", price: "1,199 - ₹3,500", category: "nutrition", image: "https://th.bing.com/th/id/OIP.AYfhPfHvYhDfrmD-fBpfWQHaGh?rs=1&pid=ImgDetMain", rating: 4.6 },
+            { name: "Kettlebell - 10kg", price: "999 - ₹2,999", category: "equipment", image: "https://th.bing.com/th/id/OIP.-_wQ-xjL0lmkYz3SV_QFVAHaJT?w=139&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7", rating: 4.4 },
+            { name: "Fitness Tracker Watch", price: "1,499 - ₹4,999", category: "accessories", image: "https://th.bing.com/th/id/OIP.rB1Aes-0F7v1NMRwQfU66gHaHa?w=181&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7", rating: 4.7 },
+            { name: "Gym Gloves", price: "299 - ₹1,099", category: "accessories", image: "https://th.bing.com/th/id/OIP.Jwg0dB8x8KBrs-HflzP5NgHaHa?w=165&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7", rating: 4.2 }
+        ];
+
+
+
+
+
+        function displayProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = items.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" />
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">₹${product.price}</div>
+                    <div class="rating">${'★'.repeat(Math.floor(product.rating))} (${product.rating})</div>
+                    <button class="buy-button" onclick="buyProduct('${product.name}')">Buy Now</button>
+                </div>
+            `).join('');
+        }
+
+        function searchOnFlipkart() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                const url = `https://www.flipkart.com/search?q=${encodeURIComponent(query)}`;
+                window.open(url, '_blank');
+            } else {
+                alert('Please enter a search term.');
+            }
+        }
+
+        function buyProduct(productName) {
+            const url = `https://www.flipkart.com/search?q=${encodeURIComponent(productName)}`;
+            window.open(url, '_blank');
+        }
+
+        function filterProducts() {
+            const category = document.getElementById('categoryFilter').value;
+            const filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
+            displayProducts(filteredProducts);
+        }
+
+        function sortProducts() {
+            const sortType = document.getElementById('sortPrice').value;
+            const sortedProducts = [...products];
+            if (sortType === 'low-high') {
+                sortedProducts.sort((a, b) => a.price - b.price);
+            } else if (sortType === 'high-low') {
+                sortedProducts.sort((a, b) => b.price - a.price);
+            }
+            displayProducts(sortedProducts);
+        }
+
+        window.onload = () => displayProducts(products);
+    </script>
+</body>
+</html>

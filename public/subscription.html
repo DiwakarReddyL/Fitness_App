@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Subscription Form</title>
+
+    <!-- EmailJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        /* Form Elements */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Button Styles */
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Initialize EmailJS with your Public Key
+        (function() {
+            emailjs.init("Nz3NON4BY52Q7bUnu"); // Replace with your actual EmailJS Public Key
+        })();
+
+        // Function to send the email
+        function sendMail(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('service_kj5fyuj', 'template_t5cc6mf', '#subscriptionForm')
+                .then(function(response) {
+                    alert("Subscription successful! Thank you.");
+                    document.getElementById('subscriptionForm').reset(); // Reset form after submission
+                }, function(error) {
+                    alert("Failed to subscribe. Please try again.");
+                    console.log('FAILED...', error);
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Subscribe to Our Fitness Program</h2>
+
+        <form id="subscriptionForm" onsubmit="sendMail(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <label for="fitness_goal">Fitness Goal:</label>
+            <select id="fitness_goal" name="fitness_goal" required>
+                <option value="" disabled selected>Select your fitness goal</option>
+                <option value="muscleGain">Muscle Gain</option>
+                <option value="weightLoss">Weight Loss</option>
+                <option value="endurance">Increase Endurance</option>
+                <option value="strength">Build Strength</option>
+            </select>
+
+            <label for="experience">Experience Level:</label>
+            <select id="experience" name="experience" required>
+                <option value="" disabled selected>Select your experience level</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+
+            <label for="coach">Preferred Coach:</label>
+            <select id="coach" name="coach" required>
+                <option value="" disabled selected>Select a preferred coach</option>
+                <option value="David Williams">David Williams (Body Builder Coach)</option>
+                <option value="Rosy Rivera">Rosy Rivera (Cardio Coach)</option>
+                <option value="Matt Stonie">Matt Stonie (Fitness Coach)</option>
+            </select>
+
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</body>
+</html>

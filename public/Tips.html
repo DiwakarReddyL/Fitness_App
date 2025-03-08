@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips and Recommendations</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+        }
+        h2, h3 {
+            color: #f39c12;
+        }
+        p, li {
+            color: #dcdcdc;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        
+        /* Section Container */
+        .section__container {
+            max-width: 1200px;
+            padding: 2rem;
+            margin: auto;
+        }
+
+        /* Section Header */
+        .section__header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Tips Grid */
+        .tips__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Tips Card */
+        .tips__card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Card Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover Effect */
+        .tips__card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Heading */
+        .tips__card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* List Styles */
+        .tips__card ul {
+            list-style-type: disc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tips__card li {
+            margin-bottom: 0.7rem;
+            line-height: 1.6;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .section__header {
+                font-size: 2rem;
+            }
+            .tips__card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="tips" id="tips">
+        <div class="section__container tips__container">
+            <h2 class="section__header">Tips and Recommendations</h2>
+            
+            <div class="tips__grid">
+                
+                <!-- Fitness Tips -->
+                <div class="tips__card">
+                    <h3>Fitness Tips</h3>
+                    <ul>
+                        <li><strong>Set Clear Goals:</strong> Define specific and achievable fitness goals to stay motivated.</li>
+                        <li><strong>Warm-Up:</strong> Always warm up before exercise to prevent injuries.</li>
+                        <li><strong>Consistency is Key:</strong> Maintain a regular workout schedule for effective results.</li>
+                        <li><strong>Mix It Up:</strong> Include a variety of workouts like strength training, cardio, and flexibility exercises.</li>
+                        <li><strong>Track Progress:</strong> Use a journal or app to monitor your progress and stay on track.</li>
+                    </ul>
+                </div>
+                
+                <!-- Healthy Body Maintenance -->
+                <div class="tips__card">
+                    <h3>Maintain a Healthy Body</h3>
+                    <ul>
+                        <li><strong>Balanced Diet:</strong> Eat a mix of proteins, carbohydrates, and healthy fats.</li>
+                        <li><strong>Stay Hydrated:</strong> Drink at least 8-10 glasses of water daily.</li>
+                        <li><strong>Get Enough Sleep:</strong> Aim for 7-8 hours of sleep to support recovery and health.</li>
+                        <li><strong>Mental Health:</strong> Practice mindfulness or yoga to reduce stress.</li>
+                        <li><strong>Avoid Harmful Habits:</strong> Limit alcohol and avoid smoking to maintain overall wellness.</li>
+                    </ul>
+                </div>
+                
+                <!-- Exercise Recommendations -->
+                <div class="tips__card">
+                    <h3>Exercise Recommendations</h3>
+                    <ul>
+                        <li><strong>Morning Exercise:</strong> Working out in the morning boosts energy and mood throughout the day.</li>
+                        <li><strong>Strength Training:</strong> Do weight training 2-3 times a week to build muscle and bone strength.</li>
+                        <li><strong>Cardio Workouts:</strong> Include 30 minutes of cardio like running or cycling, 3-4 times a week.</li>
+                        <li><strong>Flexibility:</strong> Stretch regularly or do yoga to improve mobility and reduce injury risks.</li>
+                        <li><strong>Rest Days:</strong> Give your body time to recover by taking 1-2 rest days per week.</li>
+                    </ul>
+                </div>
+                
+                <!-- Wellness and Lifestyle -->
+                <div class="tips__card">
+                    <h3>Wellness and Lifestyle Tips</h3>
+                    <ul>
+                        <li><strong>Routine:</strong> Establish a daily routine that incorporates exercise, meals, and relaxation.</li>
+                        <li><strong>Mindful Eating:</strong> Pay attention to your meals, avoiding distractions while eating.</li>
+                        <li><strong>Active Lifestyle:</strong> Engage in physical activities like walking, gardening, or dancing.</li>
+                        <li><strong>Social Connections:</strong> Spend time with friends and family to boost mental well-being.</li>
+                        <li><strong>Positive Attitude:</strong> Focus on your progress, not perfection, and celebrate small wins.</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</body>
+</html>
